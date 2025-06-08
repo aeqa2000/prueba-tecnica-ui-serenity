@@ -8,6 +8,28 @@
     <packaging>jar</packaging>
 
     <name>Sample Serenity BDD project using JUnit 5</name>
+    <profiles>
+        <profile>
+            <id>parallel</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.5.3</version>
+                        <configuration>
+                            <includes>
+                                <include>**/When*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <serenity.screenplay.parallel>true</serenity.screenplay.parallel>
+                                <serenity.screenplay.parallel.threads>4</serenity.screenplay.parallel.threads>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <properties>
         <serenity.version>4.2.30</serenity.version>

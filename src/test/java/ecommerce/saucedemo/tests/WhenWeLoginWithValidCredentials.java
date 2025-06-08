@@ -12,7 +12,7 @@ public class WhenWeLoginWithValidCredentials {
     @Steps
     SaucedemoUser arley;
 
-    @Test
+    @Test()
     public void shouldLoginSuccessfully() {
 
         arley.goToSaucedemo()
