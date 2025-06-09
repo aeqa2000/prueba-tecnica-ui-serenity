@@ -28,4 +28,3 @@ Feature: Arley tries to login to the Saucedemo application
       | wrong_user    | secret_sauce   |
       | standard_user | wrong_password |
       | wrong_user    | wrong_password |
-
