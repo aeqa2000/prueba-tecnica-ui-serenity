@@ -23,7 +23,7 @@
                         <version>3.5.3</version>
                         <configuration>
                             <includes>
-                                <include>**/Runner*.java</include>
+                                <include>**/CucumberTest*.java</include>
                             </includes>
                             <systemPropertyVariables>
                                 <serenity.screenplay.parallel>true</serenity.screenplay.parallel>
@@ -166,7 +166,7 @@
                 <version>3.5.3</version>
                 <configuration>
                     <includes>
-                        <include>**/Runner*.java</include>
+                        <include>**/CucumberTest*.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
