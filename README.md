@@ -3,6 +3,8 @@
 
 Este README explica cómo preparar tu entorno en Windows y ejecutar las pruebas UI del repositorio [aeqa2000/prueba-tecnica-ui-serenity](https://github.com/aeqa2000/prueba-tecnica-ui-serenity).
 
+Link de los recursos: https://mega.nz/folder/r2wiXD4D#P1cbVQF1Q468sMGVnNYmcg
+
 ---
 
 ## 🛠 Prerrequisitos
