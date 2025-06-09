@@ -17,11 +17,11 @@ public class SaucedemoHomePage extends PageObject {
     WebElementFacade cartBadge;
 
     public String returnLoginSuccessTitle() {
-        return findBy(assertLoginSuccessTitle).then().getText();
+        return findBy(assertLoginSuccessTitle).waitUntilVisible().then().getText();
     }
 
     public String returnLoginFailedMessage(String message) {
-        return findBy(assertLoginFailedMessage, message).then().getText();
+        return findBy(assertLoginFailedMessage, message).waitUntilVisible().then().getText();
     }
 
     public void clickOnAddToCartButton(String productName) {

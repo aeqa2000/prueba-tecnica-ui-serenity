@@ -17,11 +17,14 @@ public class SaucedemoLoginPage extends PageObject {
     WebElementFacade loginButton;
 
     public void ingressCredentials(String username, String password) {
+        usernameField.waitUntilVisible();
         usernameField.type(username);
+        passwordField.waitUntilVisible();
         passwordField.type(password);
     }
 
     public void clickLoginButton() {
+        loginButton.waitUntilVisible();
         loginButton.click();
     }
 
