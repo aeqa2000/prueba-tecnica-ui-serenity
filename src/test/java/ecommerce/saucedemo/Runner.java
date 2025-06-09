@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features",
-        glue     = "ecommerce.saucedemo.steps"
+        features = "src/test/resources/features"
 )
 public class Runner {
 

@@ -1,14 +1,15 @@
 
 @Cucumber
-Feature: I try to login to the Saucedemo application
+Feature: Arley tries to login to the Saucedemo application
 
   Background:
-    Given I navigate to: www.saucedemo.com
+    Given "Arley" navigates to: www.saucedemo.com
 
-  Scenario Template: : I try to login with valid credentials
-    When I enter "<username>" in the field Username and I enter "<password>" in the field Password
-    And I click on the button Login
-    Then I should see the title: "Products" in the current page
+  @Regression
+  Scenario Template: Arley tries to login with valid credentials
+    When "Arley" enter "<username>" in the field Username and enter "<password>" in the field Password
+    And "Arley" clicks on the button Login
+    Then "Arley" should sees the title: "Products" in the current page
 
     Examples:
         | username        | password      |
@@ -16,10 +17,11 @@ Feature: I try to login to the Saucedemo application
         | problem_user    | secret_sauce  |
         | performance_glitch_user | secret_sauce |
 
-  Scenario Template: I try to login with invalid credentials
-    When I enter "<username>" in the field Username and I enter "<password>" in the field Password
-    And I click on the button Login
-    Then I should see the message: "Epic sadface: Username and password do not match any user in this service"
+  @Regression
+  Scenario Template: Arley tries to login with invalid credentials
+    When "Arley" enter "<username>" in the field Username and enter "<password>" in the field Password
+    And "Arley" clicks on the button Login
+    Then "Arley" should sees the message: "Epic sadface: Username and password do not match any user in this service"
 
     Examples:
       | username      | password       |

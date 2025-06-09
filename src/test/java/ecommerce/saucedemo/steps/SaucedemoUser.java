@@ -2,52 +2,45 @@ package ecommerce.saucedemo.steps;
 
 import ecommerce.saucedemo.pageobject.SaucedemoHomePage;
 import ecommerce.saucedemo.pageobject.SaucedemoLoginPage;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.annotations.Steps;
+import net.serenitybdd.core.steps.ScenarioActor;
 import org.junit.Assert;
 
-public class SaucedemoUser {
+public class SaucedemoUser extends ScenarioActor {
 
     String actor;
 
-    @Steps
+    @Steps(shared = true)
     SaucedemoLoginPage loginPage;
 
-    @Steps
+    @Steps(shared = true)
     SaucedemoHomePage homePage;
 
-    @Given("I navigate to: www.saucedemo.com")
-    public SaucedemoUser go_to_saucedemo() {
+    @Step("#actor go to Saucedemo login page")
+    public void goToSaucedemo() {
         loginPage.setDefaultBaseUrl("https://www.saucedemo.com/");
         loginPage.open();
-        return this;
     }
 
-    @When("I enter {string} in the field Username and I enter {string} in the field Password")
-    public SaucedemoUser ingress_credentials(String username, String password) {
+    @Step("#actor ingress credentials: {0} / {1}")
+    public void ingressCredentials(String username, String password) {
         loginPage.ingressCredentials(username, password);
-        return this;
     }
 
-    @And("I click on the button Login")
-    public SaucedemoUser click_login_button() {
+    @Step("#actor click on the login button")
+    public void clickLoginButton() {
         loginPage.clickLoginButton();
-        return this;
     }
 
-    @Then("I should see the title: {string} in the current page")
-    public SaucedemoUser verify_login_success(String assertion) {
+    @Step("#actor verify login success with assertion: {0}")
+    public void verifyLoginSuccess(String assertion) {
         Assert.assertEquals(assertion, homePage.returnLoginSuccessTitle());
-        return this;
     }
 
-    @Then("I should see the message: {string}")
-    public SaucedemoUser verify_login_failure(String message) {
+    @Step("#actor verify login failure that contains this message: {0}")
+    public void verifyLoginFailure(String message) {
         Assert.assertTrue(homePage.returnLoginFailedMessage(message).contains(message));
-        return this;
     }
 
 }
