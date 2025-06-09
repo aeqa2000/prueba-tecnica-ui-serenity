@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                            http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.serenitybdd.starter</groupId>
     <artifactId>serenity-junit-starter</artifactId>
@@ -8,6 +12,7 @@
     <packaging>jar</packaging>
 
     <name>Sample Serenity BDD project using JUnit 5</name>
+
     <profiles>
         <profile>
             <id>parallel</id>
@@ -18,7 +23,7 @@
                         <version>3.5.3</version>
                         <configuration>
                             <includes>
-                                <include>**/When*.java</include>
+                                <include>**/Runner*.java</include>
                             </includes>
                             <systemPropertyVariables>
                                 <serenity.screenplay.parallel>true</serenity.screenplay.parallel>
@@ -33,12 +38,16 @@
 
     <properties>
         <serenity.version>4.2.30</serenity.version>
+        <!-- Actualizamos a la versión de Cucumber que trae serenity-cucumber -->
+        <cucumber.version>7.22.2</cucumber.version>
         <junit5.version>5.12.2</junit5.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <tags></tags>
         <webdriver.base.url>https://www.saucedemo.com/</webdriver.base.url>
     </properties>
+
     <dependencies>
+        <!-- Serenity Core & JUnit support -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>
@@ -57,15 +66,11 @@
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Serenity Screenplay & WebDriver support -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-screenplay</artifactId>
-            <version>${serenity.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-ensure</artifactId>
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
@@ -76,11 +81,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-ensure</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Logging & Assertions -->
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.11</version>
         </dependency>
-        <!-- JUNIT 5 DEPENDENCY-->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.22.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit 5 & Vintage (para tests legacy) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -94,27 +114,42 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.22.0</version>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- JUNIT 4 DEPENDENCY-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencias ajustadas para Cucumber + Serenity 4.x -->
         <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit5.version}</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>4.2.33</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+            <!-- Surefire deshabilitado en favor de Failsafe -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -123,15 +158,15 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
+            <!-- Failsafe: ejecuta tu runner @RunWith(CucumberWithSerenity) -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.5.3</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/Test*.java</include>
-                        <include>**/*TestSuite.java</include>
-                        <include>**/When*.java</include>
+                        <include>**/Runner*.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
@@ -147,6 +182,8 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -159,6 +196,8 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+
+            <!-- Serenity reporting plugin -->
             <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>
                 <artifactId>serenity-maven-plugin</artifactId>
@@ -186,5 +225,5 @@
             </plugin>
         </plugins>
     </build>
-</project>
 
+</project>
