@@ -1,5 +1,6 @@
 package ecommerce.saucedemo.stepdefinitions;
 
+import ecommerce.saucedemo.screenplay.tasks.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import net.serenitybdd.screenplay.actors.OnStage;
@@ -39,11 +40,7 @@ public class SaucedemoStepDefinitions {
     public void ingress_credentials(String actor, String user, String pass) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(LoginPage.USERNAME, isVisible()).forNoMoreThan(5).seconds(),
-                        Enter.theValue(user).into(LoginPage.USERNAME),
-
-                        WaitUntil.the(LoginPage.PASSWORD, isVisible()).forNoMoreThan(5).seconds(),
-                        Enter.theValue(pass).into(LoginPage.PASSWORD)
+                        LoginWith.credentials(user,pass)
                 );
     }
 
@@ -85,8 +82,7 @@ public class SaucedemoStepDefinitions {
     public void click_add_to_cart_button(String actor, String product) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(HomePage.ADD_TO_CART_BUTTON(product), isVisible()).forNoMoreThan(5).seconds(),
-                        Click.on(HomePage.ADD_TO_CART_BUTTON(product))
+                        AddToCart.item(product)
                 );
     }
 
@@ -104,8 +100,7 @@ public class SaucedemoStepDefinitions {
     public void click_on_cart_button(String actor) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(HomePage.CART_ICON, isVisible()).forNoMoreThan(5).seconds(),
-                        Click.on(HomePage.CART_ICON)
+                        OpenCart.now()
                 );
     }
 
@@ -122,8 +117,7 @@ public class SaucedemoStepDefinitions {
     public void click_checkout_button(String actor) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(CartPage.CHECKOUT_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
-                        Click.on(CartPage.CHECKOUT_BUTTON)
+                        StartCheckout.now()
                 );
     }
 
@@ -131,8 +125,7 @@ public class SaucedemoStepDefinitions {
     public void enter_first_name(String actor, String firstName) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(CheckoutPage.FIRST_NAME_FIELD, isVisible()).forNoMoreThan(5).seconds(),
-                        Enter.theValue(firstName).into(CheckoutPage.FIRST_NAME_FIELD)
+                        CheckoutInformation.with(firstName,null,null)
                 );
     }
 
@@ -140,8 +133,7 @@ public class SaucedemoStepDefinitions {
     public void enter_last_name(String actor, String lastName) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(CheckoutPage.LAST_NAME_FIELD, isVisible()).forNoMoreThan(5).seconds(),
-                        Enter.theValue(lastName).into(CheckoutPage.LAST_NAME_FIELD)
+                        CheckoutInformation.with(null,lastName,null)
                 );
     }
 
@@ -149,8 +141,7 @@ public class SaucedemoStepDefinitions {
     public void enter_postal_code(String actor, String postalCode) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(CheckoutPage.POSTAL_CODE_FIELD, isVisible()).forNoMoreThan(5).seconds(),
-                        Enter.theValue(postalCode).into(CheckoutPage.POSTAL_CODE_FIELD)
+                        CheckoutInformation.with(null,null,postalCode)
                 );
     }
 
@@ -176,8 +167,7 @@ public class SaucedemoStepDefinitions {
     public void click_finish_button(String actor) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(
-                        WaitUntil.the(CheckoutPage.FINISH_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
-                        Click.on(CheckoutPage.FINISH_BUTTON)
+                        FinishOrder.now()
                 );
     }
 

@@ -42,10 +42,5 @@ public class CheckoutInformation implements Task {
                     Enter.theValue(postal).into(CheckoutPage.POSTAL_CODE_FIELD)
             );
         }
-        // el click Continue
-        actor.attemptsTo(
-                WaitUntil.the(CheckoutPage.CONTINUE_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
-                Click.on(CheckoutPage.CONTINUE_BUTTON)
-        );
     }
 }

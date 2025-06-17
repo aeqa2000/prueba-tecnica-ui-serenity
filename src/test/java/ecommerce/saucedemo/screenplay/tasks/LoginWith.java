@@ -29,10 +29,7 @@ public class LoginWith implements Task {
                 Enter.theValue(user).into(LoginPage.USERNAME),
 
                 WaitUntil.the(LoginPage.PASSWORD, isVisible()).forNoMoreThan(5).seconds(),
-                Enter.theValue(pass).into(LoginPage.PASSWORD),
-
-                WaitUntil.the(LoginPage.LOGIN_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
-                Click.on(LoginPage.LOGIN_BUTTON)
+                Enter.theValue(pass).into(LoginPage.PASSWORD)
         );
     }
 }
